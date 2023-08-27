@@ -28,7 +28,7 @@ jobs:
         run: bash src/init.sh
 
       - name: Check proxies
-        run: python src/checker.sh
+        run: python src/checker.py
 
       - name: Commit and push changes
         run: |
