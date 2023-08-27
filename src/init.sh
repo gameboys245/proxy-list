@@ -1,7 +1,3 @@
-pip install git+https://github.com/HeronErin/proxy-checker-python
-
-
-
 echo downloading to unfiltered_unchecked.txt
 
 

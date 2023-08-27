@@ -1,0 +1,35 @@
+name: PROXY Updater
+on:
+  schedule:
+    - cron: '10 * * * *' # Run at the 10th minute of every hour
+  workflow_dispatch: # Trigger on manual dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install proxy-checker-python
+        run: pip install git+https://github.com/HeronErin/proxy-checker-python
+
+      - name: Download unchecked proxies
+        run: bash src/init.sh
+
+      - name: Check proxies
+        run: python src/checker.sh
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "http: $(cat http.txt | wc -l) socks4: $(cat socks4.txt | wc -l) socks5: $(cat socks5.txt | wc -l) json: $(cat json_output.txt | wc -l)  at $(date)"
+          git push
