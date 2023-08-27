@@ -38,7 +38,7 @@ def main():
 	lines = f.read().split("\n")
 	f.close()
 
-	with ThreadPoolExecutor(max_workers=80) as exec:
+	with ThreadPoolExecutor(max_workers=40) as exec:
 		for line in lines:
 			exec.submit(runner, line, checker)
 

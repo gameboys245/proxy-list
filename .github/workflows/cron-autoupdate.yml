@@ -1,7 +1,7 @@
 name: PROXY Updater
 on:
   schedule:
-    - cron: '10 * * * *' # Run at the 10th minute of every hour
+    - cron: '0 0 * * *' # Run at the 10th minute of every hour
   workflow_dispatch: # Trigger on manual dispatch
 
 jobs:
